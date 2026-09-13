@@ -1,15 +1,20 @@
 local Players = game:GetService("Players")
+local TextChatService = game:GetService("TextChatService")
+
 local player = Players.LocalPlayer
+local playerGui = player:WaitForChild("PlayerGui")
 
 local gui = Instance.new("ScreenGui")
 gui.Name = "TrollScreen"
 gui.IgnoreGuiInset = true
 gui.ResetOnSpawn = false
 gui.DisplayOrder = 999999
-gui.Parent = player:WaitForChild("PlayerGui")
+gui.Parent = playerGui
 
+-- TROLL #1
 local text = Instance.new("TextLabel")
-text.Size = UDim2.fromScale(1, 1)
+text.Size = UDim2.fromScale(1, 0.7)
+text.Position = UDim2.fromScale(0, 0.05)
 text.BackgroundColor3 = Color3.new(0, 0, 0)
 text.TextColor3 = Color3.new(1, 1, 1)
 text.Text = "😝  😝  😝  😝  😝\n\nDumbass, Get Trolled\n\n😝  😝  😝  😝  😝"
@@ -17,3 +22,79 @@ text.TextScaled = true
 text.Font = Enum.Font.GothamBlack
 text.TextStrokeTransparency = 0
 text.Parent = gui
+
+-- COUNTDOWN
+local countdown = Instance.new("TextLabel")
+countdown.Size = UDim2.fromScale(1, 0.2)
+countdown.Position = UDim2.fromScale(0, 0.72)
+countdown.BackgroundColor3 = Color3.new(0, 0, 0)
+countdown.TextColor3 = Color3.new(1, 1, 1)
+countdown.TextScaled = true
+countdown.Font = Enum.Font.GothamBlack
+countdown.TextStrokeTransparency = 0
+countdown.Parent = gui
+
+-- 5 → 1
+for i = 5, 1, -1 do
+	countdown.Text = "Sorry Fam, Here's the Real Script\n\n" .. i
+	task.wait(1)
+end
+
+countdown.Text = "Here ya go Fam"
+
+-- BUTTON
+local button = Instance.new("TextButton")
+button.Size = UDim2.fromScale(0.4, 0.1)
+button.Position = UDim2.fromScale(0.3, 0.9)
+button.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+button.TextColor3 = Color3.fromRGB(0, 0, 0)
+button.Text = "GET THE REAL SCRIPT"
+button.TextScaled = true
+button.Font = Enum.Font.GothamBlack
+button.Parent = gui
+
+local corner = Instance.new("UICorner")
+corner.CornerRadius = UDim.new(0, 12)
+corner.Parent = button
+
+-- TROLL #2
+button.MouseButton1Click:Connect(function()
+	button:Destroy()
+	countdown:Destroy()
+	text:Destroy()
+
+	-- Troll image
+	local trollImage = Instance.new("ImageLabel")
+	trollImage.Size = UDim2.fromScale(1, 1)
+	trollImage.Position = UDim2.fromScale(0, 0)
+	trollImage.BackgroundColor3 = Color3.new(0, 0, 0)
+	trollImage.Image = "rbxassetid://8423195710"
+	trollImage.ScaleType = Enum.ScaleType.Fit
+	trollImage.Parent = gui
+
+	-- Text over Troll #2
+	local trollText = Instance.new("TextLabel")
+	trollText.Size = UDim2.fromScale(1, 0.18)
+	trollText.Position = UDim2.fromScale(0, 0.03)
+	trollText.BackgroundTransparency = 1
+	trollText.TextColor3 = Color3.new(1, 1, 1)
+	trollText.Text = "GET RICKROLLED DUMBASS"
+	trollText.TextScaled = true
+	trollText.Font = Enum.Font.GothamBlack
+	trollText.TextStrokeTransparency = 0
+	trollText.ZIndex = 2
+	trollText.Parent = gui
+
+	
+-- Say "I got trolled" every second
+task.spawn(function()
+	while true do
+		local channel = TextChatService.TextChannels:FindFirstChild("RBXGeneral")
+
+		if channel then
+			channel:SendAsync("I GOT RICKROLLED 😭")
+		end
+
+		task.wait(1)
+	end
+end)
