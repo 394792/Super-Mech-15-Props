@@ -85,16 +85,15 @@ button.MouseButton1Click:Connect(function()
 	trollText.ZIndex = 2
 	trollText.Parent = gui
 
-	
--- Say "I got trolled" every second
-task.spawn(function()
-	while true do
-		local channel = TextChatService.TextChannels:FindFirstChild("RBXGeneral")
+	-- Send the message every second
+	local channel = TextChatService.TextChannels:FindFirstChild("RBXGeneral")
 
-		if channel then
-			channel:SendAsync("I GOT RICKROLLED 😭")
-		end
-
-		task.wait(1)
+	if channel then
+		task.spawn(function()
+			while true do
+				channel:SendAsync("I GOT RICKROLLED 😭")
+				task.wait(1)
+			end
+		end)
 	end
 end)
